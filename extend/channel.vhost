@@ -1,4 +1,0 @@
-<?php
-class channel extends Vhost {
-}
-?>
