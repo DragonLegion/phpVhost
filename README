@@ -1,9 +1,0 @@
-PHP based Vhost project for IRC networks.
-
-This is a CLI script and NOT designed to be run as a webserver page but WILL have both plaintext and XML/HTML based logging.
-
-File open based and socket based forks will be developed.
-
-Coding style is based on C++ coding standards.
-
-All functions are to be explained either in a .function file or a code block header before the function.

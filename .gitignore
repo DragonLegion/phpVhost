@@ -1,9 +1,0 @@
-# Ignore rules #
-################
-*conf.php
-!default.conf.php
-*.pid
-/logs*
-error_log
-check.php
-*~
