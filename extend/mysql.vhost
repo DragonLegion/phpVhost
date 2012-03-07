@@ -1,0 +1,62 @@
+<?php
+class sql extends Vhost {
+	//queries: update select insert delete
+	//query type: table select where (where) limit (limit)
+	public function sql($type,$query) {
+		if ($type == "select") {
+			$r = $this->$this->_parseSel($query);
+		} elseif ($type == "delete") {
+			$r = $this->$this->_parseDel($query);
+		} elseif ($type == 'update') {
+			$r = $this->$this->_parseUpd($query);
+		} elseif ($type == 'insert') {
+			$r = $this->$this->_parseIns($query);
+		} else {
+			$this->_eLog("Unapproved mysql query type aborted: $type $query");
+			return FALSE;
+		}
+		$ret = mysql_query($r);
+		$ass = mysql_fetch_assoc($ret);
+		mysql_free_result($ret);
+		return $ass;
+	}
+	private function _parseSel($query) {
+		//select parse and return
+		//select setup: table select where (where) limit (limit)
+		$q = explode(" ", $query);
+		$Q = "SELECT $q[1] FROM $q[0] WHERE $q[3]".(isset($q['4']) ? " LIMIT $q[5]" : '');
+		return $Q;
+	}
+	private function _parseDel($query) {
+		//delete parse and return
+		//delete setup: table where (where) limit (limit)
+		$q = explode(" ",$query);
+		$Q = "DELETE FROM $q[0] WHERE $q[2]".(isset($q['3']) ? " LIMIT $q[4]" : '');
+		return $Q;
+	}
+	private function _parseUpd($query) {
+		//update parse and return
+		//update setup: table set (set) where (where) limit (limit)
+		$q = explode(" ",$query);
+		$Q = "UPDATE $q[0] SET str_replace('(', '', str_replace(')', '', $q[2])) WHERE $q[4]".(isset($q[5]) ? " LIMIT $q[6]" : '');
+		return $Q;
+	}
+	private function _parseIns($query) {
+		//insert parse and return
+		//insert setup: table set (set)
+		$q = explode(" ",$query) {
+		$s = explode(",", $q['2']);
+		foreach ($s as $k => $S) {
+			if ($k == 0) {
+				$str = "('$S',";
+			} elseif ($k == count($s)-1) {
+				$str .= "'$S')";
+			} else {
+				$str .= "'$S',";
+			}
+		}
+		$Q = "INSERT INTO $q[0] $q[1] $str";
+		return $Q;
+	}
+}
+?>

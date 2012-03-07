@@ -1,0 +1,34 @@
+<?php
+class private extends Vhost {
+	public function raw ($raw) {
+		global $_CONF;
+		$r = explode(" ",$raw);
+		if ($r['1'] == $this->cModeCheck) {
+			if ($r['1'] == '324') {
+				if (strpos($r['2'],"#") !== FALSE) {
+					foreach ($_CONF['channel'] as $k => $channel) {
+						if ($channel['name'] == $r['2']) {
+							if ($r['3'] != $channel['modes']) {
+								$this->_send("MODE $r[2] ".str_replace("+", "-", $r['3']));
+								$this->_send("MODE $r[2] +$channel[modes]");
+							}
+						}
+					}
+				}
+			} elseif ($r['1'] == '') {
+				//put in rest of mode checks
+			}
+		}
+	}
+	public function quit ($message) {
+	}
+	public function remaccount($user,$reason,$account) {
+	}
+	public function nick ($newnick) {
+	}
+	public function donator ($user,$promoter,$level) {
+	}
+	public function query ($user,$query) {
+	}
+}
+?>

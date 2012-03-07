@@ -1,0 +1,4 @@
+<?php
+class bLog extends Vhost {
+}
+?>
