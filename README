@@ -1,0 +1,9 @@
+PHP based project for IRC vhost bots.  This is a CLI based project and is NOT designed to be used from a web directory.  Logging will be plaintext or XML/HTML configurable.
+
+There are 2 forks, 1 fopen and 1 sockets, both active development.
+
+Coding standard is C++ format and comments for functions/classes are to be blocks with full explanations either in file or a xxxx.function file.
+
+Current servers supported:
+Unreal
+Inspircd

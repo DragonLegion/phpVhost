@@ -1,0 +1,73 @@
+<?php
+class sql extends Vhost {
+	//queries: update select delete insert
+	//format: table (select/set) (set) where (where) limit (limit)
+	public function sql($type,$query) {
+		if ($type == 'select') {
+			$r = $this->_parseSel($query);
+			$ret = $this->_select($r);
+		} elseif ($type == 'delete') {
+			$r = $this->_parseDel($query);
+			$ret = $this->_delete($r);
+		} elseif ($type == 'insert') {
+			$r = $this->_parseIns($query);
+			$ret = $this->_insert($query);
+		} elseif ($type == 'update') {
+			$r = $this->_parseUpd($query);
+			$ret = $this->_update($query);
+		} else {
+			$this->_eLog("Unapproved txtSQL query type aborted: $type $query");
+			return FALSE;
+		}
+		return $ret;
+	}
+	private function _parseSel($query) {
+		//format: table select where (where) limit (limit)
+		$q = explode(" ",$query);
+	}
+	private function _parseDel($query) {
+		//format: table where (where) limit (limit)
+		$q = explode(" ",$query);
+	}
+	private function _parseIns($query) {
+		//format: table set (set)
+		$q = explode(" ",$query);
+	}
+	private function _parseUpd($query) {
+		//format: table set (set) where (where) limit (limit)
+		$q = explode(" ",$query);
+	}
+	private function _select($query) {
+		if (!$r = $this->txtSQL->select($query)) {
+			$this->_eLog("txtSQL Error: ".$this->txtSQL->get_last_error());
+			return FALSE;
+		} else {
+			return $r;
+		}
+	}
+	private function _delete($query) {
+		if (!$r = $this->txtSQL->delete($query)) {
+			$this->_eLog("txtSQL Error: ".$this->txtSQL->get_last_error());
+			return FALSE;
+		} else {
+			return $r;
+		}
+	}
+	private function _insert($query) {
+		if (!$r = $this->txtSQL->insert($query)) {
+			$this->_eLog("txtSQL Error: ".$this->txtSQL->get_last_error());
+			return FALSE;
+		} else {
+			return $r;
+		}
+	}
+	private function _update($query) {
+		if (!$r = $this->txtSQL->update($query)) {
+			$this->_eLog("txtSQL Error: ".$this->txtSQL->get_last_error());
+			return FALSE;
+		} else {
+			return $r;
+		}
+	}
+}
+?>
