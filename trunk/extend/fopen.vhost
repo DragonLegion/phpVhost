@@ -1,5 +1,6 @@
 <?php
-class fopen extends Vhost {
+class fopen extends Vhost
+{
 	function connect($server,$port)
 	{
 		$con = fsockopen($server,$port);
