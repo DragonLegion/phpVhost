@@ -1,14 +1,20 @@
 <?php
-class vhost extends Vhost {
-	public function vhost($vhost) {
+class vhost extends Vhost
+{
+	public function vhost($vhost)
+	{
 	}
-	public function ident($ident) {
+	public function ident($ident)
+	{
 	}
-	public function name($name) {
+	public function name($name)
+	{
 	}
-	public function swois($swois) {
+	public function swois($swois)
+	{
 	}
-	public function status($user) {
+	public function status($user)
+	{
 	}
 }
 ?>

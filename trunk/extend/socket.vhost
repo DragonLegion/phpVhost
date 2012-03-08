@@ -1,0 +1,8 @@
+<?php
+class socket extends Vhost
+{
+	function connect ($server,$port)
+	{
+	}
+}
+?>
